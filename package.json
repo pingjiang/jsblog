@@ -4,12 +4,17 @@
   "description": "Wordpress implementation with NodeJS and express.",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^0.7.8",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "0.3.x",
     "express": "3.4.x",
     "i18n-2": "0.4.x",
     "jade": "0.35.x",
     "mongoose": "3.6.x",
-    "mongoose-tree": "^0.2.2"
+    "mongoose-tree": "^0.2.2",
+    "passport": "^0.2.0",
+    "passport-local": "^1.0.0",
+    "passport-oauth": "^1.0.0"
   },
   "devDependencies": {
     "mocha": "1.13.x"

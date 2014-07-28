@@ -3,13 +3,28 @@ mixin label(field, title)
 
 mixin password(field, value)
   input.form-control(type="password", id=field, name=field, value=value)
-
+  
+mixin hidden(field, value)
+  input.form-control(type="hidden", id=field, name=field, value=value)
+  
+mixin email(field, value)
+  input.form-control(type="email", id=field, name=field, value=value)
+  
 mixin text(field, value)
   input.form-control(type="text", id=field, name=field, value=value)
 
 mixin textarea(field, value)
   textarea.form-control(id=field, name=field, rows="5")= value
 
+mixin select(field, options, value)
+  select.form-control(id=field, name=field)
+    if options instanceof Array
+      each v in options
+        option(value=v)=v
+    else
+      each v, i in options
+        option(value=i)=v   
+        
 mixin number(field, value)
   input.form-control(type="number", id=field, name=field, value=value)
 

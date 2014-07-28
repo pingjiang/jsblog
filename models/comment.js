@@ -49,5 +49,5 @@ var Comment = new Schema({
   }
 });
 
-Comment.plugin('tree');
+Comment.plugin(tree);
 module.exports = mongoose.model('Comment', Comment);

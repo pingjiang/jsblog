@@ -1,9 +1,13 @@
+var flash = require('connect-flash');
 var express = require('express');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
 var config = require('./config');
-
+var User = require('./models/user');
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+  
 var MongoStore = require('connect-mongo')(express);
 var i18n = require('i18n-2');
 var mongooseConnection = mongoose.connect(config.db.url, function(err) {
@@ -27,7 +31,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser(config.secret));
-
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+  
 app.use(express.session({
     secret: config.sessionSecret,
     store: new MongoStore({
@@ -41,7 +48,41 @@ app.use(express.session({
     }
 }));
 
+passport.use(new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password'
+  }, function(username, password, done) {
+    User.findOne({ niceName: username }, function (err, user) {
+      console.log('passport check username and password ...');
+      if (err) { 
+        console.log(err);
+        return done(err); 
+      }
+      if (!user) {
+        console.log('Incorrect username.');
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        console.log('Incorrect password.');
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 i18n.expressBind(app, { locales: ['zh', 'en'] });
+app.i18n = i18n;
 
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));

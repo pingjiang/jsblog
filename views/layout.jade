@@ -36,5 +36,14 @@ html
               a(href='/termtaxonomies')= __("Termtaxonomies")
             li
               a(href='/termrelationships')= __("Termrelationships")
+          ul.nav.navbar-nav.navbar-right
+            if session && session.user
+              li
+                a(href='/profile')= __("Profile")
+              li
+                a(href='/logout')= __("Logout")
+            else
+              li
+                a(href='/login')= __("Login")
     .container
       block content

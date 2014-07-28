@@ -1,0 +1,55 @@
+
+//- any
+mixin quote()
+  blockquote
+    if block
+      p
+        block
+    else
+      p No content.
+
+//- {headers=[], rows=[{}]}    
+mixin grid(tableDescriptor)
+  table.table.table-striped.table-bordered.table-hover
+    if tableDescriptor.headers
+      thead
+        tr
+          each header in tableDescriptor.headers
+            th= header
+    if tableDescriptor.rows
+      tbody
+        each row in tableDescriptor.rows
+          tr
+            each col in row
+              td= col
+    if !tableDescriptor.headers
+      each row in tableDescriptor
+        tr
+          each col in row
+            td= col
+        
+    
+//- []
+mixin listGroup(items)
+  ul.list-group
+    each item in items
+      li.list-group-item= item
+      
+    
+//- {href, content}
+mixin linkListGroup(items)
+  div.list-group
+    each item in items
+      a.list-group-item(href=item.href)= item.content
+      
+//- styleClasses: panel-default, panel-primary, panel-success, panel-info, panel-warning, panel-danger
+mixin panel(styleClasses, header, content, footer)
+  div.panel(class= styleClasses)
+    if header
+      div.panel-heading
+        h3.panel-title= header
+    div.panel-body= content
+    if block
+      block
+    if footer
+      div.panel-footer= footer

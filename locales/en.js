@@ -59,5 +59,8 @@
   "Url": "Url", 
   "User": "User", 
   "Users": "Users", 
-  "Value": "Value"
+  "Value": "Value",
+	"passwordConfirmation": "Confirm Password", 
+  "%s is required": "%s is required",
+  "Password is not the same": "Password is not the same"
 }
