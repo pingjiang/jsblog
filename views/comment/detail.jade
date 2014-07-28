@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  h2.display-data= __("%s Detail", __("Comment"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Authorname
+          td= display(comment.authorName)
+        tr
+          td Authoremail
+          td= display(comment.authorEmail)
+        tr
+          td Authorip
+          td= display(comment.authorIP)
+        tr
+          td Authorurl
+          td= display(comment.authorUrl)
+        tr
+          td Created
+          td= display(comment.created)
+        tr
+          td Updated
+          td= display(comment.updated)
+        tr
+          td Content
+          td= display(comment.content)
+        tr
+          td User
+          td= display(comment.user)
+        tr
+          td Banned
+          td= display(comment.banned)
+
+
+  .form-actions
+    a.btn.btn-warning(href="/comments")= __("Back")
+    | 
+    a.btn.btn-primary(href="/comments/" + comment._id + "/edit")= __("Edit")
+    | 
+    a.btn.btn-danger(href="/comments/" + comment._id + "/delete")= __("Delete")

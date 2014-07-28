@@ -1,0 +1,25 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+  form#termtaxonomy-form(action="/termtaxonomies/" + termtaxonomy._id + "/edit", method="POST", role="form")
+    fieldset
+      legend= __("Edit %s", __("Termtaxonomy"))
+
+      .form-group
+        +label("term", __("Term"))
+        | ObjectId
+        +errorMessage(termtaxonomy, 'term')
+      .form-group
+        +label("taxonomy", __("Taxonomy"))
+        +text("taxonomy", termtaxonomy.taxonomy)
+        +errorMessage(termtaxonomy, 'taxonomy')
+      .form-group
+        +label("description", __("Description"))
+        +text("description", termtaxonomy.description)
+        +errorMessage(termtaxonomy, 'description')
+
+    .form-actions
+      a.btn.btn-warning(href="/termtaxonomies")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Save"))

@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h2.display-data= __("%s Detail", __("Termtaxonomy"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Term
+          td= display(termtaxonomy.term)
+        tr
+          td Taxonomy
+          td= display(termtaxonomy.taxonomy)
+        tr
+          td Description
+          td= display(termtaxonomy.description)
+
+
+  .form-actions
+    a.btn.btn-warning(href="/termtaxonomies")= __("Back")
+    | 
+    a.btn.btn-primary(href="/termtaxonomies/" + termtaxonomy._id + "/edit")= __("Edit")
+    | 
+    a.btn.btn-danger(href="/termtaxonomies/" + termtaxonomy._id + "/delete")= __("Delete")

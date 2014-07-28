@@ -1,0 +1,39 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+
+  form#link-form(action="/links/create", method="POST")
+    fieldset
+      legend= __("Create a new %s", __("Link"))
+    
+      .form-group
+        +label("target", __("Target"))
+
+        +text("target", link.target)
+        +errorMessage(link, 'target')
+      .form-group
+        +label("name", __("Name"))
+
+        +text("name", link.name)
+        +errorMessage(link, 'name')
+      .form-group
+        +label("image", __("Image"))
+
+        +text("image", link.image)
+        +errorMessage(link, 'image')
+      .form-group
+        +label("description", __("Description"))
+
+        +text("description", link.description)
+        +errorMessage(link, 'description')
+      .form-group
+        +label("rel", __("Rel"))
+
+        +text("rel", link.rel)
+        +errorMessage(link, 'rel')
+
+    .form-actions
+      a.btn.btn-warning(href="/links")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Create"))

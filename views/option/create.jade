@@ -1,0 +1,24 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+
+  form#option-form(action="/options/create", method="POST")
+    fieldset
+      legend= __("Create a new %s", __("Option"))
+    
+      .form-group
+        +label("name", __("Name"))
+
+        +text("name", option.name)
+        +errorMessage(option, 'name')
+      .form-group
+        +label("value", __("Value"))
+
+        +text("value", option.value)
+        +errorMessage(option, 'value')
+
+    .form-actions
+      a.btn.btn-warning(href="/options")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Create"))

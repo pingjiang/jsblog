@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Termrelationships"))
+    a.btn.btn-primary.pull-right(href="/termrelationships/create")= __("Create a new %s", __("Termrelationship"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Objectid")
+        th= __("Termtaxonomyid")
+        th= __("Termorder")
+        th= __("Operations")
+
+    each termrelationship in termrelationships
+      tr
+        td= display(termrelationship.objectId)
+        td= display(termrelationship.termTaxonomyId)
+        td= display(termrelationship.termOrder)
+
+        td
+          a(href="/termrelationships/" + termrelationship._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/termrelationships/" + termrelationship._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/termrelationships/" + termrelationship._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

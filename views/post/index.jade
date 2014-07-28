@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Posts"))
+    a.btn.btn-primary.pull-right(href="/posts/create")= __("Create a new %s", __("Post"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Authorid")
+        th= __("Authorname")
+        th= __("Title")
+        th= __("Content")
+        th= __("Excerpt")
+        th= __("Url")
+        th= __("Created")
+        th= __("Updated")
+        th= __("Metas")
+        th= __("Operations")
+
+    each post in posts
+      tr
+        td= display(post.authorId)
+        td= display(post.authorName)
+        td= display(post.title)
+        td= display(post.content)
+        td= display(post.excerpt)
+        td= display(post.url)
+        td= display(post.created)
+        td= display(post.updated)
+        td= display(post.metas)
+
+        td
+          a(href="/posts/" + post._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/posts/" + post._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/posts/" + post._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

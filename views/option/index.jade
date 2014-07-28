@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Options"))
+    a.btn.btn-primary.pull-right(href="/options/create")= __("Create a new %s", __("Option"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Name")
+        th= __("Value")
+        th= __("Operations")
+
+    each option in options
+      tr
+        td= display(option.name)
+        td= display(option.value)
+
+        td
+          a(href="/options/" + option._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/options/" + option._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/options/" + option._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

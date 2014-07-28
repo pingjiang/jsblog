@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+  h2.display-data= __("Delete %s?", __("Termrelationship"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Objectid
+          td= display(termrelationship.objectId)
+        tr
+          td Termtaxonomyid
+          td= display(termrelationship.termTaxonomyId)
+        tr
+          td Termorder
+          td= display(termrelationship.termOrder)
+
+
+  form#termrelationship-form.form-horizontal(action="/termrelationships/" + termrelationship._id + "/delete", method="POST")
+    .form-actions
+      a.btn.btn-warning(href="/termrelationships")= __("Back")
+      | 
+      input.btn.btn-danger(type="submit", value=__("Delete"))

@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2.display-data= __("Delete %s?", __("Option"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Name
+          td= display(option.name)
+        tr
+          td Value
+          td= display(option.value)
+
+
+  form#option-form.form-horizontal(action="/options/" + option._id + "/delete", method="POST")
+    .form-actions
+      a.btn.btn-warning(href="/options")= __("Back")
+      | 
+      input.btn.btn-danger(type="submit", value=__("Delete"))

@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Users"))
+    a.btn.btn-primary.pull-right(href="/users/create")= __("Create a new %s", __("User"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Firstname")
+        th= __("Lastname")
+        th= __("Nicename")
+        th= __("Displayname")
+        th= __("Email")
+        th= __("Password")
+        th= __("Activationkey")
+        th= __("Created")
+        th= __("Updated")
+        th= __("Status")
+        th= __("Url")
+        th= __("Operations")
+
+    each user in users
+      tr
+        td= display(user.firstName)
+        td= display(user.lastName)
+        td= display(user.niceName)
+        td= display(user.displayName)
+        td= display(user.email)
+        td= display(user.password)
+        td= display(user.activationKey)
+        td= display(user.created)
+        td= display(user.updated)
+        td= display(user.status)
+        td= display(user.url)
+
+        td
+          a(href="/users/" + user._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/users/" + user._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/users/" + user._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

@@ -1,0 +1,24 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+
+  form#term-form(action="/terms/create", method="POST")
+    fieldset
+      legend= __("Create a new %s", __("Term"))
+    
+      .form-group
+        +label("name", __("Name"))
+
+        +text("name", term.name)
+        +errorMessage(term, 'name')
+      .form-group
+        +label("slug", __("Slug"))
+
+        +text("slug", term.slug)
+        +errorMessage(term, 'slug')
+
+    .form-actions
+      a.btn.btn-warning(href="/terms")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Create"))

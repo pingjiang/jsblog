@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Termtaxonomies"))
+    a.btn.btn-primary.pull-right(href="/termtaxonomies/create")= __("Create a new %s", __("Termtaxonomy"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Term")
+        th= __("Taxonomy")
+        th= __("Description")
+        th= __("Operations")
+
+    each termtaxonomy in termtaxonomies
+      tr
+        td= display(termtaxonomy.term)
+        td= display(termtaxonomy.taxonomy)
+        td= display(termtaxonomy.description)
+
+        td
+          a(href="/termtaxonomies/" + termtaxonomy._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/termtaxonomies/" + termtaxonomy._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/termtaxonomies/" + termtaxonomy._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

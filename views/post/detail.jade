@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  h2.display-data= __("%s Detail", __("Post"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Authorid
+          td= display(post.authorId)
+        tr
+          td Authorname
+          td= display(post.authorName)
+        tr
+          td Title
+          td= display(post.title)
+        tr
+          td Content
+          td= display(post.content)
+        tr
+          td Excerpt
+          td= display(post.excerpt)
+        tr
+          td Url
+          td= display(post.url)
+        tr
+          td Created
+          td= display(post.created)
+        tr
+          td Updated
+          td= display(post.updated)
+        tr
+          td Metas
+          td= display(post.metas)
+
+
+  .form-actions
+    a.btn.btn-warning(href="/posts")= __("Back")
+    | 
+    a.btn.btn-primary(href="/posts/" + post._id + "/edit")= __("Edit")
+    | 
+    a.btn.btn-danger(href="/posts/" + post._id + "/delete")= __("Delete")

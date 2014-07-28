@@ -1,0 +1,59 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+
+  form#post-form(action="/posts/create", method="POST")
+    fieldset
+      legend= __("Create a new %s", __("Post"))
+    
+      .form-group
+        +label("authorId", __("Authorid"))
+
+        | ObjectId
+        +errorMessage(post, 'authorId')
+      .form-group
+        +label("authorName", __("Authorname"))
+
+        +text("authorName", post.authorName)
+        +errorMessage(post, 'authorName')
+      .form-group
+        +label("title", __("Title"))
+
+        +text("title", post.title)
+        +errorMessage(post, 'title')
+      .form-group
+        +label("content", __("Content"))
+
+        +text("content", post.content)
+        +errorMessage(post, 'content')
+      .form-group
+        +label("excerpt", __("Excerpt"))
+
+        +text("excerpt", post.excerpt)
+        +errorMessage(post, 'excerpt')
+      .form-group
+        +label("url", __("Url"))
+
+        +text("url", post.url)
+        +errorMessage(post, 'url')
+      .form-group
+        +label("created", __("Created"))
+
+        +date("created", post.created)
+        +errorMessage(post, 'created')
+      .form-group
+        +label("updated", __("Updated"))
+
+        +date("updated", post.updated)
+        +errorMessage(post, 'updated')
+      .form-group
+        +label("metas", __("Metas"))
+
+        | Array
+        +errorMessage(post, 'metas')
+
+    .form-actions
+      a.btn.btn-warning(href="/posts")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Create"))

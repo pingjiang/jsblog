@@ -1,0 +1,49 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+  form#comment-form(action="/comments/" + comment._id + "/edit", method="POST", role="form")
+    fieldset
+      legend= __("Edit %s", __("Comment"))
+
+      .form-group
+        +label("authorName", __("Authorname"))
+        +text("authorName", comment.authorName)
+        +errorMessage(comment, 'authorName')
+      .form-group
+        +label("authorEmail", __("Authoremail"))
+        +text("authorEmail", comment.authorEmail)
+        +errorMessage(comment, 'authorEmail')
+      .form-group
+        +label("authorIP", __("Authorip"))
+        +text("authorIP", comment.authorIP)
+        +errorMessage(comment, 'authorIP')
+      .form-group
+        +label("authorUrl", __("Authorurl"))
+        +text("authorUrl", comment.authorUrl)
+        +errorMessage(comment, 'authorUrl')
+      .form-group
+        +label("created", __("Created"))
+        +date("created", comment.created)
+        +errorMessage(comment, 'created')
+      .form-group
+        +label("updated", __("Updated"))
+        +date("updated", comment.updated)
+        +errorMessage(comment, 'updated')
+      .form-group
+        +label("content", __("Content"))
+        +text("content", comment.content)
+        +errorMessage(comment, 'content')
+      .form-group
+        +label("user", __("User"))
+        | ObjectId
+        +errorMessage(comment, 'user')
+      .form-group
+        +label("banned", __("Banned"))
+        +boolean("banned", comment.banned)
+        +errorMessage(comment, 'banned')
+
+    .form-actions
+      a.btn.btn-warning(href="/comments")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Save"))

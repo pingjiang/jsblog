@@ -1,0 +1,21 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+  form#term-form(action="/terms/" + term._id + "/edit", method="POST", role="form")
+    fieldset
+      legend= __("Edit %s", __("Term"))
+
+      .form-group
+        +label("name", __("Name"))
+        +text("name", term.name)
+        +errorMessage(term, 'name')
+      .form-group
+        +label("slug", __("Slug"))
+        +text("slug", term.slug)
+        +errorMessage(term, 'slug')
+
+    .form-actions
+      a.btn.btn-warning(href="/terms")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Save"))

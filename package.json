@@ -1,0 +1,22 @@
+{
+  "name": "jsblog",
+  "version": "0.0.1",
+  "description": "Wordpress implementation with NodeJS and express.",
+  "main": "app.js",
+  "dependencies": {
+    "connect-mongo": "0.3.x",
+    "express": "3.4.x",
+    "i18n-2": "0.4.x",
+    "jade": "0.35.x",
+    "mongoose": "3.6.x",
+    "mongoose-tree": "^0.2.2"
+  },
+  "devDependencies": {
+    "mocha": "1.13.x"
+  },
+  "scripts": {
+    "start": "nodemon -w models -w config -w routes app.js"
+  },
+  "repository": "https://github.com/pingjiang/jsblog",
+  "private": true
+}

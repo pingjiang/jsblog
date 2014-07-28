@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Comments"))
+    a.btn.btn-primary.pull-right(href="/comments/create")= __("Create a new %s", __("Comment"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Authorname")
+        th= __("Authoremail")
+        th= __("Authorip")
+        th= __("Authorurl")
+        th= __("Created")
+        th= __("Updated")
+        th= __("Content")
+        th= __("User")
+        th= __("Banned")
+        th= __("Operations")
+
+    each comment in comments
+      tr
+        td= display(comment.authorName)
+        td= display(comment.authorEmail)
+        td= display(comment.authorIP)
+        td= display(comment.authorUrl)
+        td= display(comment.created)
+        td= display(comment.updated)
+        td= display(comment.content)
+        td= display(comment.user)
+        td= display(comment.banned)
+
+        td
+          a(href="/comments/" + comment._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/comments/" + comment._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/comments/" + comment._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

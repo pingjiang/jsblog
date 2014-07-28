@@ -1,0 +1,69 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+
+  form#user-form(action="/users/create", method="POST")
+    fieldset
+      legend= __("Create a new %s", __("User"))
+    
+      .form-group
+        +label("firstName", __("Firstname"))
+
+        +text("firstName", user.firstName)
+        +errorMessage(user, 'firstName')
+      .form-group
+        +label("lastName", __("Lastname"))
+
+        +text("lastName", user.lastName)
+        +errorMessage(user, 'lastName')
+      .form-group
+        +label("niceName", __("Nicename"))
+
+        +text("niceName", user.niceName)
+        +errorMessage(user, 'niceName')
+      .form-group
+        +label("displayName", __("Displayname"))
+
+        +text("displayName", user.displayName)
+        +errorMessage(user, 'displayName')
+      .form-group
+        +label("email", __("Email"))
+
+        +text("email", user.email)
+        +errorMessage(user, 'email')
+      .form-group
+        +label("password", __("Password"))
+
+        +password("password", user.password)
+        +errorMessage(user, 'password')
+      .form-group
+        +label("activationKey", __("Activationkey"))
+
+        +text("activationKey", user.activationKey)
+        +errorMessage(user, 'activationKey')
+      .form-group
+        +label("created", __("Created"))
+
+        +date("created", user.created)
+        +errorMessage(user, 'created')
+      .form-group
+        +label("updated", __("Updated"))
+
+        +date("updated", user.updated)
+        +errorMessage(user, 'updated')
+      .form-group
+        +label("status", __("Status"))
+
+        +number("status", user.status)
+        +errorMessage(user, 'status')
+      .form-group
+        +label("url", __("Url"))
+
+        +text("url", user.url)
+        +errorMessage(user, 'url')
+
+    .form-actions
+      a.btn.btn-warning(href="/users")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Create"))

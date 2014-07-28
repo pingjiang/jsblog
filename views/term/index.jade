@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Terms"))
+    a.btn.btn-primary.pull-right(href="/terms/create")= __("Create a new %s", __("Term"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Name")
+        th= __("Slug")
+        th= __("Operations")
+
+    each term in terms
+      tr
+        td= display(term.name)
+        td= display(term.slug)
+
+        td
+          a(href="/terms/" + term._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/terms/" + term._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/terms/" + term._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

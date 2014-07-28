@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h2.display-data= __("Delete %s?", __("Term"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Name
+          td= display(term.name)
+        tr
+          td Slug
+          td= display(term.slug)
+
+
+  form#term-form.form-horizontal(action="/terms/" + term._id + "/delete", method="POST")
+    .form-actions
+      a.btn.btn-warning(href="/terms")= __("Back")
+      | 
+      input.btn.btn-danger(type="submit", value=__("Delete"))

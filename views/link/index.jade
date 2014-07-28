@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  h2.display-data= __("All %s", __("Links"))
+    a.btn.btn-primary.pull-right(href="/links/create")= __("Create a new %s", __("Link"))
+
+  table.table.table-bordered.table-striped
+    tr
+        th= __("Target")
+        th= __("Name")
+        th= __("Image")
+        th= __("Description")
+        th= __("Rel")
+        th= __("Operations")
+
+    each link in links
+      tr
+        td= display(link.target)
+        td= display(link.name)
+        td= display(link.image)
+        td= display(link.description)
+        td= display(link.rel)
+
+        td
+          a(href="/links/" + link._id + "/detail", title=__("Detail"))
+            i.glyphicon.glyphicon-search
+          | 
+          a(href="/links/" + link._id + "/edit", title=__("Edit"))
+            i.glyphicon.glyphicon-pencil
+          | 
+          a(href="/links/" + link._id + "/delete", title=__("Delete"))
+            i.glyphicon.glyphicon-ban-circle

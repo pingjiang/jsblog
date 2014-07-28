@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2.display-data= __("%s Detail", __("Term"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Name
+          td= display(term.name)
+        tr
+          td Slug
+          td= display(term.slug)
+
+
+  .form-actions
+    a.btn.btn-warning(href="/terms")= __("Back")
+    | 
+    a.btn.btn-primary(href="/terms/" + term._id + "/edit")= __("Edit")
+    | 
+    a.btn.btn-danger(href="/terms/" + term._id + "/delete")= __("Delete")

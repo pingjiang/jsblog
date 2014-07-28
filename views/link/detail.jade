@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  h2.display-data= __("%s Detail", __("Link"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Target
+          td= display(link.target)
+        tr
+          td Name
+          td= display(link.name)
+        tr
+          td Image
+          td= display(link.image)
+        tr
+          td Description
+          td= display(link.description)
+        tr
+          td Rel
+          td= display(link.rel)
+
+
+  .form-actions
+    a.btn.btn-warning(href="/links")= __("Back")
+    | 
+    a.btn.btn-primary(href="/links/" + link._id + "/edit")= __("Edit")
+    | 
+    a.btn.btn-danger(href="/links/" + link._id + "/delete")= __("Delete")

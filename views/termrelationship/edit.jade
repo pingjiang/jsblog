@@ -1,0 +1,25 @@
+extends ../layout
+include ../mixins/form-helpers
+
+block content
+  form#termrelationship-form(action="/termrelationships/" + termrelationship._id + "/edit", method="POST", role="form")
+    fieldset
+      legend= __("Edit %s", __("Termrelationship"))
+
+      .form-group
+        +label("objectId", __("Objectid"))
+        | ObjectId
+        +errorMessage(termrelationship, 'objectId')
+      .form-group
+        +label("termTaxonomyId", __("Termtaxonomyid"))
+        | ObjectId
+        +errorMessage(termrelationship, 'termTaxonomyId')
+      .form-group
+        +label("termOrder", __("Termorder"))
+        +number("termOrder", termrelationship.termOrder)
+        +errorMessage(termrelationship, 'termOrder')
+
+    .form-actions
+      a.btn.btn-warning(href="/termrelationships")= __("Back")
+      | 
+      input.btn.btn-primary(type="submit", value=__("Save"))

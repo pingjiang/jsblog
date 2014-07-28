@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  h2.display-data= __("Delete %s?", __("User"))
+            
+  table.table.table-bordered
+    tr
+      th= __("Property")
+      th= __("Value")
+        tr
+          td Firstname
+          td= display(user.firstName)
+        tr
+          td Lastname
+          td= display(user.lastName)
+        tr
+          td Nicename
+          td= display(user.niceName)
+        tr
+          td Displayname
+          td= display(user.displayName)
+        tr
+          td Email
+          td= display(user.email)
+        tr
+          td Password
+          td= display(user.password)
+        tr
+          td Activationkey
+          td= display(user.activationKey)
+        tr
+          td Created
+          td= display(user.created)
+        tr
+          td Updated
+          td= display(user.updated)
+        tr
+          td Status
+          td= display(user.status)
+        tr
+          td Url
+          td= display(user.url)
+
+
+  form#user-form.form-horizontal(action="/users/" + user._id + "/delete", method="POST")
+    .form-actions
+      a.btn.btn-warning(href="/users")= __("Back")
+      | 
+      input.btn.btn-danger(type="submit", value=__("Delete"))
