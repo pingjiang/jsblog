@@ -34,9 +34,6 @@ var User = new Schema({
     trim: true,
     match: /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
   },
-  salt: {
-    type: String
-  },
   passwordHash: {
     type: String
   },
@@ -95,8 +92,8 @@ User.virtual('password').get(function() {
   return this._password;
 }).set(function(value) {
   this._password = value;
-  this.salt = bcrypt.genSaltSync(12);
-  this.passwordHash = bcrypt.hashSync(value, this.salt);
+  var salt = bcrypt.genSaltSync(12);
+  this.passwordHash = bcrypt.hashSync(value, salt);
 });
  
 User.virtual('passwordConfirmation').get(function() {
