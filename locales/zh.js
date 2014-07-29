@@ -70,5 +70,6 @@
 	"password": "密码",
 	"captcha": "验证码",
 	"redirect_url": "返回地址",
-	"Forget Password?": "忘记密码？"
+	"Forget Password?": "忘记密码？",
+	"Logout": "退出"
 }

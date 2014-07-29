@@ -6,11 +6,42 @@ module.exports = function(app) {
     res.render('auth/login');
   });
   
-  app.post('/login', passport.authenticate('local', { 
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true 
-  }));
+  app.post('/login', function(req, res, next) {
+    if (req.session.captcha !== undefined && req.session.captcha !== req.body.captcha) {
+      req.flash('error', 'Captcha invalid');
+      return res.redirect('/login');
+    }
+    
+    // Custom callback hand failure and success.
+    passport.authenticate('local', { 
+      successRedirect: '/',
+      failureRedirect: '/login',
+      failureFlash: true,
+      successFlash: 'Login successfully, welcome!'
+    }, function(err, user, info) {
+      if (err) {
+        req.flash('error', 'login error ' + err);
+        return res.redirect('/login');
+      }
+      if (!user) {
+        req.flash('error', 'user is null');
+        return res.redirect('/login');
+      }
+      req.logIn(user, function(err) {
+        if (err) {
+          req.flash('error', 'login error ' + err);
+          return res.redirect('/login');
+        }
+        
+        if (req.session) {
+          req.session.user = user;
+        }
+    
+        req.flash('success', 'Login successfully, welcome!');
+        return res.redirect('/#' + user.niceName);
+      });
+    })(req, res, next);
+  });
   
   app.get('/resetpassword', function(req, res) {
     res.render('auth/resetpassword');
@@ -36,6 +67,7 @@ module.exports = function(app) {
   app.get('/logout', function(req, res) {
     // destroy the user's session to log them out
     // will be re-created next request
+    req.logout();
     req.session.destroy(function(){
       res.redirect('/');
     });

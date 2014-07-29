@@ -10,6 +10,8 @@ var passport = require('passport')
   
 var MongoStore = require('connect-mongo')(express);
 var i18n = require('i18n-2');
+var captcha = require('captcha');
+
 var mongooseConnection = mongoose.connect(config.db.url, function(err) {
     if (err) {
         console.log('Could not connect to database', config.db.url, ' due to error', err);
@@ -34,7 +36,8 @@ app.use(express.cookieParser(config.secret));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-  
+app.use(captcha({ url: '/captcha.jpg', color:'#0064cd', background: 'rgb(20,30,200)' })); // captcha params
+
 app.use(express.session({
     secret: config.sessionSecret,
     store: new MongoStore({
@@ -48,22 +51,15 @@ app.use(express.session({
     }
 }));
 
-passport.use(new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password'
-  }, function(username, password, done) {
-    User.findOne({ niceName: username }, function (err, user) {
-      console.log('passport check username and password ...');
+passport.use(new LocalStrategy(function(username, password, done) {
+    User.findOne({ email: username }, function (err, user) {
       if (err) { 
-        console.log(err);
         return done(err); 
       }
       if (!user) {
-        console.log('Incorrect username.');
         return done(null, false, { message: 'Incorrect username.' });
       }
       if (!user.validPassword(password)) {
-        console.log('Incorrect password.');
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
@@ -81,15 +77,23 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+app.use(function(req, res, next){
+  res.locals.session = req.session;
+  // res.locals.flash  = req.flash.bind(req);
+  next();
+});
+
 i18n.expressBind(app, { locales: ['zh', 'en'] });
-app.i18n = i18n;
+// app.i18n = i18n;
+
 
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 require('./helpers')(app);

@@ -1,15 +1,18 @@
 extends ../layout
 include ../mixins/form-helpers
+include ../mixins/ui-helpers
 
 block content
 
+  +showMessage(session.flash)
+      
   form#user-form(action="/login", method="POST")
     fieldset
       legend= __("Login")
     
       .form-group
         +label("username", __("username"))
-        +text("username")
+        +email("username")
         +errorMessage(null, 'username')
       .form-group
         +label("password", __("password"))
@@ -17,10 +20,11 @@ block content
         +errorMessage(null, 'password')
       .form-group
         +label("captcha", __("captcha"))
-        +password("captcha")
+        img(src="/captcha.jpg" alt="captcha")
+        +text("captcha")
         +errorMessage(null, 'captcha')
       +hidden("redirect_url")
-
+      
     .form-actions
       a.btn(href="/resetpassword")= __("Forget Password?")
       | 

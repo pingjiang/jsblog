@@ -1,3 +1,5 @@
+include ./mixins/ui-helpers
+
 doctype 5
 html
   head
@@ -39,11 +41,12 @@ html
           ul.nav.navbar-nav.navbar-right
             if session && session.user
               li
-                a(href='/profile')= __("Profile")
+                a(href='/profile')= session.user.displayName
               li
                 a(href='/logout')= __("Logout")
             else
               li
                 a(href='/login')= __("Login")
     .container
+      +showMessage(session ? session.flash : {})
       block content

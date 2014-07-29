@@ -30,7 +30,4 @@ block content
 
     h3 Have fun!    
 
-  ul
-    each route in mainRoutes
-      li
-        a(href="#{route.route}")= __(route.name)
+  +linkListGroup(mainRoutes.map(function(val) { return { href: val.route, content: __(val.name) }; }))

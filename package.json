@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^0.7.8",
+    "captcha": "0.0.4",
     "connect-flash": "^0.1.1",
     "connect-mongo": "0.3.x",
     "express": "3.4.x",
