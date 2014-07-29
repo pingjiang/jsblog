@@ -1,20 +1,20 @@
 
 //- message
 mixin showMessage(message)
-  if (message.error && message.error.length)
+  if (message && message.error && message.error.length)
     .alert.alert-warning.alert-dismissable
       button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
       each error in message.error
         .center!= error
       - message.error = []
-  if (message.info && message.info.length)
+  if (message && message.info && message.info.length)
     .alert.alert-info.alert-dismissable
       button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
       each info in message.info
         .center!= info
       //- REMEMBER to reset messages to an empty array
       - message.info = []
-  if (message.success && message.success.length)
+  if (message && message.success && message.success.length)
     .alert.alert-info.alert-dismissable
       button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
       each success in message.success
